@@ -52,6 +52,29 @@ There's no UI — that's the point. Once it's running:
 2. The file saves and the thumbnail appears, exactly like before.
 3. About a second later it's also on your clipboard — just `⌘V` anywhere.
 
+## Configuration
+
+You usually don't need any. By default leanshot watches **wherever macOS is set to save screenshots** (`System Settings → Screenshots → Save to`), so if you change that, leanshot follows automatically.
+
+If you'd rather pin leanshot to a specific folder regardless of the macOS setting:
+
+```sh
+# watch a specific folder
+defaults write com.kuberwastaken.leanshot folder "$HOME/Pictures/Screenshots"
+
+# go back to following the macOS screenshot location
+defaults delete com.kuberwastaken.leanshot folder
+```
+
+Changes take effect within a second — no need to restart the app.
+
+For reference, to see or change where macOS itself saves screenshots:
+
+```sh
+defaults read com.apple.screencapture location    # where they go now
+defaults write com.apple.screencapture location "$HOME/Pictures/Screenshots" && killall SystemUIServer
+```
+
 ## Uninstall
 
 ```sh
