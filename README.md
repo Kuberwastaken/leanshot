@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="assets/leanshot-1024.png" width="128" alt="leanshot icon" />
+
 # leanshot
 
 **Copy every screenshot to your clipboard — while still keeping the file.**
