@@ -16,9 +16,14 @@ end run
 
 on copyLatestShot()
 	-- newest screenshot in the folder macOS is configured to save to
+	-- Folder resolution, most specific first:
+	--   1. an explicit leanshot override:  defaults write com.kuberwastaken.leanshot folder <path>
+	--   2. wherever macOS saves screenshots (com.apple.screencapture location)
+	--   3. ~/Desktop (the macOS default)
 	set newest to ""
 	try
-		set newest to do shell script "loc=$(defaults read com.apple.screencapture location 2>/dev/null)
+		set newest to do shell script "loc=$(defaults read com.kuberwastaken.leanshot folder 2>/dev/null)
+if [ -z \"$loc\" ]; then loc=$(defaults read com.apple.screencapture location 2>/dev/null); fi
 if [ -z \"$loc\" ]; then loc=\"$HOME/Desktop\"; fi
 loc=$(printf '%s' \"$loc\" | sed \"s|^~|$HOME|\")
 ls -t \"$loc\"/*.png \"$loc\"/*.jpg \"$loc\"/*.jpeg 2>/dev/null | head -n 1"
